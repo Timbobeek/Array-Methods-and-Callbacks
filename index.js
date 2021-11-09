@@ -19,7 +19,7 @@ console.log('task 1d', finals2014[0]['Away Team Goals']);
 //(e) Winner of 2014 world cup final */
 console.log('task 1e', finals2014[0]['Win conditions']);
 
-//sdffd
+
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use getFinals to do the following:
@@ -29,10 +29,18 @@ Use getFinals to do the following:
 hint - you should be looking at the stage key inside of the objects
 */
 // receive an array as the parameter - fifaData
-function getFinals(/* code here */) {
-   /* code here */
-   // can use filter here and stage === 'final'
-}
+function getFinals(array) {
+    return array.filter((item) =>
+    item['Stage'] === 'Final');
+   }
+
+console.log(getFinals(fifaData));
+
+// const getFinals = fifaData.filter(function(item){
+//     return item['Stage'] === 'Final';
+// });
+
+// console.log(getFinals);
 
 
 
