@@ -74,7 +74,6 @@ Use the higher-order function getWinners to do the following:
 4. Returns the names of all winning countries in an array called `winners` */ 
 
 
-// 2 params (array, getFinalscb)
 function getWinners(array, cb) {
     const finals = cb(array);
     const winners = finals.map(item => {
@@ -84,9 +83,6 @@ function getWinners(array, cb) {
             return item['Away Team Name'];
         }
     });
-    // use map
-    // use a conditional if home team goals > away team goals then w want the home team name
-    // else we want the away team name
     return winners;
 }
 
@@ -106,11 +102,23 @@ hint: the strings returned need to exactly match the string in step 4.
  */
 
 
-// 4 params (array, getFinals, getYears, getWinners)
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(games, getFinalsFn, getYearsFn, getWinnersFn) {
+    const years = getYearsFn(games, getFinalsFn);
+    const winners = getWinnersFn(games, getFinalsFn);
     //use map - i would map over one array and grab each item
+    // and then I would use the index to grab the item in the other array
+    const winnersList = years.map((year, index) => {
+        const country = winners[index];
+        return `In ${year}, ${country} won the world cup!`;
+    });
+    return winnersList;
+    // year -  from const years
+    // country - from const winners
+    // const year = years.map
+    // return 
 }
+
+console.log(getWinnersByYear(fifaData, getFinals, getYears, getWinners));
 
 
 
@@ -126,16 +134,37 @@ Use the higher order function getAverageGoals to do the following:
 
 
 // getfinals, 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(finalGames) {
+
+    // const reducer = (counter, game) => {
+    //     return counter + game["Home Team Goals"] + game["Away Team Goals"];
+    // };
+
+    // let counter = 0;
+    // for(let i = 0; i<finalGames.length; i++){
+    //     const game = finalGames[i];
+    //     // counter = reducer(counter, game);
+    //     counter = counter + game["Home Team Goals"] + game["Away Team Goals"];
+    // }
+    // const sum = counter;
+    
+    // const reducer = (accumulator, game) => {
+    //     return accumulator + game["Home Team Goals"] + game["Away Team Goals"];
+    // };
+    // const sum = finalGames.reduce(reducer, 0);
+    // return (sum / finalGames.length).toFixed(2);
+
+    const sumGoals = finalGames.reduce((accumulator, item) => {
+        return accumulator + item["Home Team Goals"] + item["Away Team Goals"];
+    }, 0);
+    return (sumGoals / finalGames.length).toFixed(2);
 
    //use . reduce to add up all teh goals of teh home nad away team
    //then divide that number by the length of teh array
    // round to 2 decimal places (hint: look up toFixed())
 }
 
-
-getAverageGoals(getFinals(fifaData));
+console.log(getAverageGoals(getFinals(fifaData)));
 
 
 
